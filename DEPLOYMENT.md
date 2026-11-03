@@ -1,8 +1,10 @@
 # Deployment verification — Invoice-to-Payment Agent
 
+**Production verification update (4 November 2026 local / 3 November UTC):** The deployed Cloudflare Worker [passed a complete real end-to-end GitHub Actions check](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41695821163) at Pharos block **22034232**. Both Text and JSON invoice samples were parsed successfully, missing/mismatched data was rejected, insufficient balances and absent confirmation blocked drafts, and a real RPC-backed **unsigned 1 USDC** transfer was prepared with reference **HOST-2026-11** preserved as off-chain metadata. No transaction was signed or broadcast. The original live proof JSON is archived in the workflow artifact `invoice-to-payment-live-mainnet-proof`. The earlier HTTP 404 occurred *before deployment* and is now resolved.
+
 **Verified source:** [GitHub](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent), with passing Node unit tests and dry-run Wrangler bundle.
 
-**Observed deployment issue (3 Nov 2026):** the first deployed Worker integration workflow received HTTP **404 HTML** from `https://invoice-to-payment-agent.trantanlong2411.workers.dev/api/health` for all 34 attempts. This means the expected production URL had not published the current Worker code when checked. See [original failing job](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41689925627). Do not claim successful live Cloudflare deployment based only on green unit tests.
+**Historical deployment issue (3 Nov 2026, resolved after the successful live run):** the first deployed Worker integration workflow received HTTP **404 HTML** from `https://invoice-to-payment-agent.trantanlong2411.workers.dev/api/health` for all 34 attempts. This means the expected production URL had not published the current Worker code when checked. See [original failing job](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41689925627). Do not claim successful live Cloudflare deployment based only on green unit tests.
 
 ## Cloudflare Git integration
 
