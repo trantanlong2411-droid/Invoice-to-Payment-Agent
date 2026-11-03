@@ -14,6 +14,13 @@
 3. Payment summary first: on-chain chain ID 1672, real Circle USDC contract metadata, sender token balance, native PROS, gas and nonce. Only after explicit confirmation are unsigned EVM fields returned with `invoiceMetadata.invoiceReference` in the same envelope. Reference remains **off-chain**, not encoded in an ERC-20 `transfer(address,uint256)`.
 4. Live demo: home page has Load text sample, Load JSON sample, Load incomplete example. Examples are immediately parseable. A public funded sample sender is revalidated on demand and **is not owned by the user**.
 
+## Verified direct Mainnet test (3 November 2026)
+
+- [Successful actual Pharos Mainnet CI](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41690624183) demonstrated both invoice formats, missing and mismatched fields blocked, and an actual source-backed unsigned **1 USDC** payment at block **22032563** using invoice reference **HOST-2026-11**.
+- [Compact permanent Mainnet evidence](./verified-mainnet.json); original full JSON is archived as the `invoice-to-payment-direct-mainnet-proof` GitHub Actions artifact.
+- No signature, transaction hash or actual transfer.
+- The initial [deployed Worker smoke test](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41689925627) failed HTTP 404; website deployment remains separately unverified. See [DEPLOYMENT.md](../DEPLOYMENT.md).
+
 ## Evidence verification
 
 - Offline tests exercise parsing and real-style mock RPC failures and review gating.
