@@ -1,5 +1,7 @@
 # Invoice-to-Payment Agent — task evidence
 
+**Production verification update (4 November 2026 local / 3 November UTC):** The deployed Cloudflare Worker [passed a complete real end-to-end GitHub Actions check](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41695821163) at Pharos block **22034232**. Both Text and JSON invoice samples were parsed successfully, missing/mismatched data was rejected, insufficient balances and absent confirmation blocked drafts, and a real RPC-backed **unsigned 1 USDC** transfer was prepared with reference **HOST-2026-11** preserved as off-chain metadata. No transaction was signed or broadcast. The original live proof JSON is archived in the workflow artifact `invoice-to-payment-live-mainnet-proof`. The earlier HTTP 404 occurred *before deployment* and is now resolved.
+
 **Task:** Pharos Agent Arena · Medium / Payments · Invoice-to-Payment Agent
 
 - **Live homepage / intended Proof Link:** https://invoice-to-payment-agent.trantanlong2411.workers.dev/
@@ -27,7 +29,7 @@
 - A **separate deployed live CI workflow** checks both formats through the production Worker, rejects missing/mismatched invoice and unfunded account, blocks missing confirmation, then (when a public sample EOA remains funded) generates a real-data unsigned 1-USDC transaction, decodes ABI recipient and amount and checks the invoice reference is preserved separately.
 - The full observed raw output is emitted as a GitHub Actions artifact `invoice-to-payment-live-mainnet-proof` for successful live runs.
 
-Never claim live deployment or success until a real deployed workflow run finishes green. Never claim funds were sent or a sample sender is owned by the project; it has no signing capability. No separate /proof page is needed.
+Live deployment has now been verified by the successful deployed workflow (run 41695821163). Never claim funds were sent or a sample sender is owned by the project; it has no signing capability. No separate /proof page is needed.
 
 ## Sources
 
