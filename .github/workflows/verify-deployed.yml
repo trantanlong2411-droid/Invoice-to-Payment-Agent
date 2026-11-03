@@ -1,4 +1,5 @@
 name: Invoice-to-Payment Agent — deployed Worker end-to-end verification
+# Re-run against production after Cloudflare Workers Builds reported Success.
 on:
   push:
     branches: [main]
