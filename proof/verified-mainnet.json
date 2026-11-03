@@ -1,0 +1,35 @@
+{
+  "schema": "pharos-invoice-payment-mainnet-verified-run-v1",
+  "workflowRun": "https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41690624183",
+  "artifactName": "invoice-to-payment-direct-mainnet-proof",
+  "recordedDateUtc": "2026-11-03",
+  "source": "Successful GitHub Actions direct Pharos Mainnet JSON-RPC audit",
+  "chainId": 1672,
+  "checks": {
+    "textInvoiceParsed": true,
+    "structuredJsonInvoiceParsed": true,
+    "missingFieldsBlocked": true,
+    "amountMismatchBlocked": true,
+    "pharosOnchainBalanceAndGasChecked": true,
+    "invoicePaymentUnsigned": true
+  },
+  "formatBlocks": {
+    "text": "22032560",
+    "json": "22032566"
+  },
+  "unsignedPayment": {
+    "block": "22032563",
+    "sender": "0x08cd62babd8Dac7404504792Df30C12fC5384Df5",
+    "recipient": "0x2222222222222222222222222222222222222222",
+    "amount": "1",
+    "token": "USDC",
+    "invoiceReference": "HOST-2026-11",
+    "referenceStorage": "OFF_CHAIN_METADATA_ONLY",
+    "signed": false,
+    "broadcast": false,
+    "txHash": null
+  },
+  "deploymentStatus": "LIVE_WORKER_UNVERIFIED",
+  "previousLiveRun": "https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41689925627",
+  "deploymentLimitation": "The first published Worker test received HTTP 404 HTML; direct RPC evidence proves the engine, not the website."
+}
