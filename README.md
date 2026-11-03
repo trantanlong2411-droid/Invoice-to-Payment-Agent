@@ -94,8 +94,10 @@ The [direct real-RPC audit](https://github.com/trantanlong2411-droid/Invoice-to-
 
 The [initial deployed-Worker smoke run](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41689925627) received **HTTP 404** from the expected workers.dev URL, so production website publication **has not been independently verified yet**. See [Cloudflare deployment recovery](./DEPLOYMENT.md). Passing unit or direct-RPC tests does not change that limitation.
 
+**Production verification update (4 November 2026 local / 3 November UTC):** The deployed Cloudflare Worker [passed a complete real end-to-end GitHub Actions check](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41695821163) at Pharos block **22034232**. Both Text and JSON invoice samples were parsed successfully, missing/mismatched data was rejected, insufficient balances and absent confirmation blocked drafts, and a real RPC-backed **unsigned 1 USDC** transfer was prepared with reference **HOST-2026-11** preserved as off-chain metadata. No transaction was signed or broadcast. The original live proof JSON is archived in the workflow artifact `invoice-to-payment-live-mainnet-proof`. The earlier HTTP 404 occurred *before deployment* and is now resolved.
+
 ## Evidence status
 
-A green unit-test and Worker bundle means the code compiled and behavioral tests passed. It does **not** alone establish a live deployed Worker. After production deployment the separate end-to-end workflow tests both invoice formats, mismatches, insufficient funds, explicit confirmation, and an actual Pharos Mainnet USDC unsigned draft. **Do not claim a live end-to-end success until that job passes.**
+The direct RPC test and deployed-Worker end-to-end test both passed. The successful deployed run demonstrates the two invoice formats, mismatch handling, insufficient-balance and confirmation gates, and a correct unsigned USDC transaction with off-chain invoice reference. It does not claim funds were paid.
 
 The homepage is the intended Pharos **Proof Link**, with no separate proof page; the repository and CI logs provide reviewer-verifiable technical evidence.
