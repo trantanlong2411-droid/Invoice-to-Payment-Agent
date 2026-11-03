@@ -36,7 +36,7 @@ const fieldMap={
  recipient:['recipient wallet','recipient address','wallet address','payment address','payee wallet','recipient'],
  amount:['amount','total due','amount due','total','payment amount'],
  currency:['currency','token','asset'],
- reference:['payment reference','invoice reference','reference','invoice number','invoice id','invoice #','invoice no'],
+ reference:['payment reference','invoice reference','reference'],
  invoiceNumber:['invoice number','invoice no','invoice #','invoice id'],
  description:['description','memo','service']
 };
@@ -66,6 +66,7 @@ function normalize(raw,format){
  const required=['payee','recipient','amount','currency','reference'];
  for(const k of required)if(!values[k])missing.push(k);
  if(!values.invoiceNumber&&values.reference)values.invoiceNumber=values.reference;
+ if(!values.reference&&values.invoiceNumber)values.reference=values.invoiceNumber;
  if(values.payee&&(values.payee.length<2||values.payee.length>100))errors.push('Payee name must be 2–100 characters');
  if(values.recipient&&!evmAddress(values.recipient))errors.push('Recipient must be a verified, nonzero 0x EVM wallet address; names are not resolved');
  if(values.recipient&&evmAddress(values.recipient))values.recipient=evmAddress(values.recipient);
