@@ -88,6 +88,12 @@ Only official Circle USDC (6 decimals) and native PROS (18 decimals) are support
 
 The app never asks for private keys, signs, sends or submits transactions. A review fingerprint binds the exact invoice fields and sender for the second check, **not** the wallet owner's identity. The sample public sender is someone else's account, so the user has no ability to spend its assets. An unsigned JSON is not an invoice paid receipt, and the off-chain invoice reference is not visible in a standard on-chain USDC transfer.
 
+## Verified direct Pharos Mainnet result (3 November 2026)
+
+The [direct real-RPC audit](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41690624183) **passed** using the actual Circle USDC contract on Pharos Mainnet 1672. It parsed text and JSON sample invoices (blocks **22032560** and **22032566**), blocked missing/mismatched fields, and successfully generated an **unsigned 1 USDC** transfer draft at block **22032563**, with invoice reference **HOST-2026-11** preserved as off-chain metadata. It did not sign or broadcast. [Permanent compact evidence JSON](./proof/verified-mainnet.json).
+
+The [initial deployed-Worker smoke run](https://github.com/trantanlong2411-droid/Invoice-to-Payment-Agent/actions/runs/41689925627) received **HTTP 404** from the expected workers.dev URL, so production website publication **has not been independently verified yet**. See [Cloudflare deployment recovery](./DEPLOYMENT.md). Passing unit or direct-RPC tests does not change that limitation.
+
 ## Evidence status
 
 A green unit-test and Worker bundle means the code compiled and behavioral tests passed. It does **not** alone establish a live deployed Worker. After production deployment the separate end-to-end workflow tests both invoice formats, mismatches, insufficient funds, explicit confirmation, and an actual Pharos Mainnet USDC unsigned draft. **Do not claim a live end-to-end success until that job passes.**
