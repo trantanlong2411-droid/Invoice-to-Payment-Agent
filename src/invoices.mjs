@@ -47,7 +47,7 @@ function normalize(raw,format){
  const entries=Object.entries(candidates);
  const values={};
  for(const [name,keys] of Object.entries(fieldMap)){
-  const matched=entries.filter(([k])=>keys.includes(k.toLowerCase().trim()));
+  const matched=entries.filter(([k])=>keys.includes(k.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/[_-]/g,' ').toLowerCase().trim()));
   if(!matched.length)continue;
   const distinct=[...new Set(matched.map(([,v])=>String(v??'').trim()).filter(Boolean))];
   if(distinct.length>1)mismatch.push('Conflicting '+name+' values within the invoice');
@@ -124,6 +124,11 @@ export function parseInvoice(input){
  result.ok=result.ok&&!duplicates.length;
  return result;
 }
+function sameDecimal(a,b){
+ if(!/^\d+(?:\.\d+)?$/.test(a)||!/^\d+(?:\.\d+)?$/.test(b))return false;
+ const norm=x=>{const [i,f='']=x.split('.');return i.replace(/^0+(?=\d)/,'')+'.'+f.replace(/0+$/,'');};
+ return norm(a)===norm(b);
+}
 export function compareInvoice(invoice,confirmation={}){
  const mismatches=[];
  const overrides={
@@ -141,7 +146,7 @@ export function compareInvoice(invoice,confirmation={}){
   else if(field==='currency'&&found.toUpperCase()!==wanted.toUpperCase())
    mismatches.push('Currency/token mismatch with expected payment');
   else if(field==='amount'&&(!/^\d+(?:\.\d+)?$/.test(wanted)||
-     Number(found)!==Number(wanted)))mismatches.push('Amount mismatch with expected payment');
+     !sameDecimal(found,wanted)))mismatches.push('Amount mismatch with expected payment');
   else if(!['recipient','currency','amount'].includes(field)&&
     found.toLowerCase()!==wanted.toLowerCase())mismatches.push(field+' mismatch with expected payment');
  }
